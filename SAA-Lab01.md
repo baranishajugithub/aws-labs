@@ -263,12 +263,14 @@ Pageant is one of the tools present in the zip. It is an SSH authentication agen
 
   * Start PuTTY.
   * In the Category pane, click Session.
-  * In the Host Name text box, type the public IP address of your MyBastionHost.
+  * In the Host Name text box, type the public IP address of your MyBastionHost(Public IP of MyAppServer)
   * In the Category pane, click on Connection and type 30 in the keepalive box which by defalt has 0 written in it.
   * In the Category pane, expand Connection, expand SSH, and then click Auth.
   * Check the Allow agent forwarding box.
   * Click Browse and select mykey.ppk file you generated in previous steps and then click Open.
   * Click Open to start the PuTTY session. PuTTY will ask whether you wish to cache the server’s host key. Click Yes.
+
+```bash Lobin user name: ec2-user ```
 
 You are now connected to MyAppServer EC2 instance. From here you can jump on to MyDBServer.
 
@@ -277,8 +279,8 @@ Try pinging google.com from here. It will work because MyAppServer is a part of 
 We will now login to MyDBServer and check the same.
 
 ```bash
-ssh ec2-user@<Private DNS end point of MyDBServer instance>
-```
+ssh ec2-user@ <Private IP of My DB Server DNS end point of MyDBServer instance>
+``` 
 
 Once you are in the MyDBServer, if you try pinging google.com it will fail. That proves that we do not have out bound internet connectivity from the instances in Private Subnets. You can use either use a NAT instance or NAT Gateway service to enable out bound internet connectivity from the instances in Private Subnets, remember NAT is only for outbound and Jump Servers/Bastion hosts are used for inbound remote access to the instances in Private Subnets.
 
